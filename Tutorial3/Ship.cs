@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Tutorial3.Containers;
 
-namespace Tutorial3
-{
+namespace Tutorial3.Containers;
+
     public class Ship
     {
         public string Name { get; set; }
@@ -36,5 +36,9 @@ namespace Tutorial3
         {
             Containers.Clear();
         }
+        public override string ToString()
+        {
+            string containerDetails = string.Join("\n", Containers.Select(c => c.ToString()));
+            return $"Name: {Name}, Max Capacity: {MaxCapacity}, Containers: \n{containerDetails}";
+        }
     }
-}

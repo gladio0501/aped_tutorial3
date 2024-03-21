@@ -22,4 +22,5 @@ public class CargoContainer : Container
         }
         CargoMass += cargoWeight;
     }
+
 }

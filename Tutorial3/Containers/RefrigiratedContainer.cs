@@ -8,10 +8,9 @@ public class RefrigeratedContainer : Container
     public Product Product { get; set; }
     public double Temperature { get; set; }
 
-    public RefrigeratedContainer(double cargoMass, double height, double tareWeight, double depth, double maxPayload, Product product, double temperature,string serialNumber) : base(cargoMass, height, tareWeight, depth,serialNumber, maxPayload)
+    public RefrigeratedContainer(double cargoMass, double height, double tareWeight, double depth, double maxPayload, double temperature,string serialNumber) : base(cargoMass, height, tareWeight, depth,serialNumber, maxPayload)
     {
         Type = ContainerType.Refrigerated;
-        Product = product;
         Temperature = temperature;
     }
 
@@ -20,9 +19,11 @@ public class RefrigeratedContainer : Container
         CargoMass = 0;
     }
 
-    public override void Load(double cargoWeight)
+    public void Load(Product product, double cargoWeight)
     {
-        if (Temperature < ProductTemperature.RequiredTemperatures[Product])
+        Product = product; // Set the product when loading
+
+        if (Temperature > ProductTemperature.RequiredTemperatures[Product])
         {
             throw new Exception($"The current temperature of {Temperature}°C is lower than the required temperature of {ProductTemperature.RequiredTemperatures[Product]}°C for {Product}");
         }
@@ -32,5 +33,10 @@ public class RefrigeratedContainer : Container
             throw new OverfillException($"Cargo weight exceeds the maximum limit of {MaxPayload} kg");
         }
         CargoMass += cargoWeight;
+    }
+    
+    public override string ToString()
+    {
+        return base.ToString() + $", Temperature: {Temperature}, Products: {Product}";
     }
 }

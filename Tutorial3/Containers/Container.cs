@@ -50,6 +50,10 @@ public abstract class Container : IContainer
     {
         throw new OverfillException();
     }
+    public virtual string ToString()
+    {
+        return $"Type: {Type}, Cargo Mass: {CargoMass}, Height: {Height}, Tare Weight: {TareWeight}, Depth: {Depth}, Max Payload: {MaxPayload}, Serial Number: {SerialNumber}";
+    }
 }
 
 
