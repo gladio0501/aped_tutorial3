@@ -19,7 +19,7 @@ public class LiquidContainer : Container, IHazardNotifier
     {
         double maxAllowedWeight = IsHazardous ? MaxPayload * 0.5 : MaxPayload * 0.9;
 
-        if (cargoWeight > maxAllowedWeight)
+        if (CargoMass+cargoWeight > maxAllowedWeight)
         {
             if (IsHazardous)
             {
@@ -29,9 +29,9 @@ public class LiquidContainer : Container, IHazardNotifier
             {
                 throw new OverfillException($"Cargo weight exceeds the maximum limit of {maxAllowedWeight} kg");
             }
+        }else{
+            CargoMass += cargoWeight;
         }
-
-        CargoMass += cargoWeight;
     }
     
 
